@@ -4,16 +4,27 @@ const {
   addDevice,
   updateDevice,
   getDevice,
+  getDevicesByRoomId,
+  deleteDevice
 } = require('../controllers/deviceController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-// POST /api/devices - Add a new device to a room
-router.post('/', authMiddleware, addDevice);
+// Apply auth middleware to all routes
+router.use(authMiddleware);
 
-// PUT /api/devices/:deviceId - Update a device's attributes or state
-router.put('/:deviceId', authMiddleware, updateDevice);
+// Get devices by room ID
+router.get('/room/:roomId', getDevicesByRoomId);
 
-// GET /api/devices/:deviceId - Get a specific device by ID
-router.get('/:deviceId', authMiddleware, getDevice);
+// Add device to room
+router.post('/room/:roomId', addDevice);
+
+// Update device
+router.put('/:deviceId', updateDevice);
+
+// Get single device
+router.get('/:deviceId', getDevice);
+
+// Delete device
+router.delete('/:deviceId', deleteDevice);
 
 module.exports = router;

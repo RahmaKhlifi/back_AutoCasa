@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const roomRoutes = require('./routes/rooms');
+const roomRoutes = require('./routes/roomRoutes');
 
 const app = express();
 
